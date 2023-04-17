@@ -58,10 +58,10 @@ function App() {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onSelect={() => alert('A')}>A</Dropdown.Item>
-          <Dropdown.Item onSelect={() => alert('B')}>B</Dropdown.Item>
-          <Dropdown.Item onSelect={() => alert('C')}>C</Dropdown.Item>
-          <Dropdown.Item onSelect={() => alert('D')}>D</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Acceso')}>A</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Rectificación')}>B</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Cancelación')}>C</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Oposición')}>D</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
