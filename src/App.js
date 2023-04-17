@@ -1,11 +1,14 @@
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import data from "./data.json";
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+  const [searchText, setSearchText] = useState('');
+
   const columns = [
     {
       name: "ID",
@@ -39,15 +42,44 @@ function App() {
     setLoading(false)
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const filteredData = tableData.filter((item) =>
+    item.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <div style={{ margin: "20px" }}>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Acciones
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onSelect={() => alert('Acceso')}>A</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Rectificación')}>B</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Cancelación')}>C</Dropdown.Item>
+          <Dropdown.Item onSelect={() => alert('Oposición')}>D</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+
+      <Button variant="primary" className="ml-3" onClick={() => alert('Enter')}>Enter</Button>
+
+      <input
+        type="text"
+        value={searchText}
+        onChange={handleSearch}
+        placeholder="Buscar por nombre"
+      />
       <DataTable
         title="Data"
         columns={columns}
-        data={tableData}
+        data={filteredData}
         progressPending={loading}
         pagination
+        searchable
       />
     </div>
   );
