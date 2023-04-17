@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import DataTable from "react-data-table-component";
+import { useState, useEffect } from "react";
+import data from "./data.json";
 
 function App() {
+  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  const columns = [
+    {
+      name: "ID",
+      selector: (row) => row.id,
+    },
+    {
+      name: "Nombre",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Apellido Paterno",
+      selector: (row) => row.username,
+    },
+    {
+      name: "Apellido Materno",
+      selector: (row) => row.username,
+    },
+    {
+      name: "CURP",
+      selector: (row) => row.email,
+    },
+    {
+      name: "RFC",
+      selector: (row) => row.email,
+    },
+  ];
+
+  useEffect(() => {
+    setLoading(true)
+    setTableData(data);
+    setLoading(false)
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ margin: "20px" }}>
+      <DataTable
+        title="Data"
+        columns={columns}
+        data={tableData}
+        progressPending={loading}
+        pagination
+      />
     </div>
   );
 }
